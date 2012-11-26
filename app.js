@@ -5,7 +5,6 @@
 
 var express = require('express'),
     routes = require('./routes'),
-    user = require('./routes/user'),
     http = require('http'),
     path = require('path');
 
@@ -25,11 +24,11 @@ var app = express();
  */
 
 var helenus = require('helenus'),
-  pool = new helenus.ConnectionPool({
-    hosts      : ['localhost:9160'],
-    keyspace   : 'webinar',
-    cqlVersion : '3.0.0'
-  });
+    pool = new helenus.ConnectionPool({
+      hosts      : ['localhost:9160'],
+      keyspace   : 'webinar',
+      cqlVersion : '3.0.0'
+    });
 
 pool.connect(function(err){
   if(err){
@@ -54,7 +53,8 @@ pool.connect(function(err){
   });
 
   app.get('/', routes.index);
-  app.get('/users', user.list);
+  app.post('/', routes.new);
+  app.delete('/', routes.delete);
 
   http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));

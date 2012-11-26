@@ -3,16 +3,32 @@ extends layout
 block content
   h1= title
 
-  div
-    table
-      thead
+
+  table
+    thead
+      tr
+       th First Name
+       th Last Name
+       th Email
+       th &nbsp;
+    tbody
+      each user in users
         tr
-         th First Name
-         th Last Name
-         th Email
-      tbody
-        each user in users
-          tr
-            td #{user.get('first_name').value}
-            td #{user.get('last_name').value}
-            td #{user.get('email').value}
+          td #{user.get('first_name').value}
+          td #{user.get('last_name').value}
+          td #{user.get('email').value}
+          td
+            form(action='/', method='post')
+              input(id='_method', type='hidden', name='_method', value='delete')
+              input(id='email', name='email', type='hidden', value="#{user.get('email').value}")
+              input(type='submit',value='Remove User',data-transition='fade', data-theme='c')
+
+  h2 New User
+  form(action='/',method='post')
+    tbody
+      tr
+        td: input(id='email',type='text',value='',placeholder='foo@bar.com',name='email')
+        td: input(id='first_name',type='text',value='',placeholder='First Name',name='first_name')
+        td: input(id='last_name',type='text',value='',placeholder='Last Name',name='last_name')
+        td: input(type='submit',value='Add User',data-transition='fade', data-theme='c')
+
