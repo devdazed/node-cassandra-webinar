@@ -3,6 +3,8 @@ node-cassandra-webinar
 
 Source files for the nodejs-cassandra webinar
 
+Russell Bradberry <rbradberry@simplereach.com> twitter:@devdazed
+
 Pre-requisites
 ==============
 
